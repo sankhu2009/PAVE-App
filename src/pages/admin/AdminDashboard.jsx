@@ -16,7 +16,8 @@ const AdminDashboard = () => {
     const loadData = async () => {
         setIsLoading(true);
         const data = await getApplicationsList();
-        setApplications(data);
+        const submittedApps = data.filter(app => app.status !== 'Draft');
+        setApplications(submittedApps);
         setIsLoading(false);
     };
 

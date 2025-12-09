@@ -28,9 +28,9 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const register = async (email, password, role) => {
+    const register = async (email, password, role, firstName, lastName) => {
         try {
-            const newUser = await registerUser(email, password, role);
+            const newUser = await registerUser(email, password, role, firstName, lastName);
             // Auto login after register
             setUser(newUser);
             localStorage.setItem('pave_current_user', JSON.stringify(newUser));

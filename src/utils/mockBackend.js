@@ -18,7 +18,7 @@ const setStore = (key, value) => {
 
 // --- Users ---
 
-export const registerUser = async (email, password, role = 'provider') => {
+export const registerUser = async (email, password, role = 'provider', firstName = '', lastName = '') => {
     await new Promise(r => setTimeout(r, DELAY));
     const users = getStore('pave_users');
 
@@ -31,6 +31,8 @@ export const registerUser = async (email, password, role = 'provider') => {
         email,
         password, // In real app, hash this!
         role,
+        firstName,
+        lastName,
         createdAt: new Date().toISOString()
     };
 

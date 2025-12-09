@@ -64,10 +64,10 @@ const ProviderDashboard = () => {
                     {/* Welcome Card */}
                     <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg p-6 text-white shadow-lg flex justify-between items-center">
                         <div>
-                            <h2 className="text-2xl font-bold mb-2" style={{ color: 'white' }}>Welcome, {user?.email}</h2>
+                            <h2 className="text-xl font-bold mb-2" style={{ color: 'white' }}>Welcome, {user?.firstName || user?.email}</h2>
                             <p className="text-slate-300" style={{ color: 'white' }}>Track the status of your enrollment applications here.</p>
                         </div>
-                        <Link to="/provider/enrollment" className="btn bg-sky-500 hover:bg-sky-600 text-white border-0 shadow-lg flex items-center gap-2">
+                        <Link to="/provider/enrollment" className="btn bg-white hover:bg-slate-100 text-slate-900 border-0 shadow-lg flex items-center gap-2">
                             <PlusCircle className="w-5 h-5" /> Start New Application
                         </Link>
                     </div>

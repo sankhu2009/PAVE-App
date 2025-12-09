@@ -74,7 +74,11 @@ const WizardContainer = () => {
 
     const handleNext = async () => {
         if (isReadOnly) {
-            if (currentStep < steps.length) updateStandalone('currentStep', currentStep + 1);
+            if (currentStep < steps.length) {
+                updateStandalone('currentStep', currentStep + 1);
+            } else {
+                navigate('/provider');
+            }
             return;
         }
 
@@ -101,6 +105,13 @@ const WizardContainer = () => {
         if (!isReadOnly) await saveDraft();
         updateStandalone('currentStep', stepId);
         window.scrollTo(0, 0);
+    };
+
+    const handleExit = async () => {
+        if (!isReadOnly) {
+            await saveDraft();
+        }
+        navigate('/provider');
     };
 
     if (isLoading) return <div className="p-12 text-center text-slate-500">Loading Application...</div>;
@@ -210,6 +221,13 @@ const WizardContainer = () => {
 
                 {/* Footer Actions Sticky */}
                 <div className="wizard-footer">
+                    <button
+                        onClick={handleExit}
+                        className="btn btn-ghost text-slate-500 hover:text-slate-700 mr-auto"
+                    >
+                        &larr; Back to Enrollments
+                    </button>
+
                     <button
                         onClick={handleBack}
                         disabled={currentStep === 1}

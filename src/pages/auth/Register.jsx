@@ -7,6 +7,8 @@ const Register = () => {
     const { register } = useAuth();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -29,7 +31,7 @@ const Register = () => {
 
         setIsLoading(true);
         try {
-            const result = await register(formData.email, formData.password, 'provider');
+            const result = await register(formData.email, formData.password, 'provider', formData.firstName, formData.lastName);
             if (result.success) {
                 navigate('/provider');
             } else {
@@ -90,6 +92,31 @@ const Register = () => {
                     )}
 
                     <form onSubmit={handleRegister}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="input-group">
+                                <label>First Name</label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    placeholder="John"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label>Last Name</label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    placeholder="Doe"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                        </div>
+
                         <div className="input-group">
                             <label>Email Address</label>
                             <input
