@@ -26,8 +26,8 @@ const Login = () => {
                 body: JSON.stringify({
                     to: email,
                     subject: 'PAVE Password Reset',
-                    text: 'Click here to reset your password: https://pave-portal.com/reset?token=123',
-                    html: '<p>Click here to reset your password: <a href="https://pave-portal.com/reset?token=123">Reset Link</a></p>'
+                    text: `Click here to reset your password: https://pave-portal.com/reset?token=${crypto.randomUUID()}`,
+                    html: `<p>Click here to reset your password: <a href="https://pave-portal.com/reset?token=${crypto.randomUUID()}">Reset Link</a></p>`
                 })
             });
             // We show success regardless to prevent email enumeration
