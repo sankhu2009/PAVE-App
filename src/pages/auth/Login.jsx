@@ -17,12 +17,26 @@ const Login = () => {
     const [view, setView] = useState('login'); // 'login' | 'forgot'
     const [resetSent, setResetSent] = useState(false);
 
-    const handleForgotSubmit = (e) => {
+    const handleForgotSubmit = async (e) => {
         e.preventDefault();
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            await fetch('/api/sendEmail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to: email,
+                    subject: 'PAVE Password Reset',
+                    text: 'Click here to reset your password: https://pave-portal.com/reset?token=123',
+                    html: '<p>Click here to reset your password: <a href="https://pave-portal.com/reset?token=123">Reset Link</a></p>'
+                })
+            });
+            // We show success regardless to prevent email enumeration
             setResetSent(true);
-        }, 800);
+        } catch (error) {
+            console.error('Failed to send email:', error);
+            // Optional: show error message to user, or still show success for security
+            setResetSent(true);
+        }
     };
 
     const toggleAdmin = () => {
